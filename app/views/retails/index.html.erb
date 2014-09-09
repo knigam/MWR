@@ -1,0 +1,46 @@
+<%- model_class = Retail -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:location) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:url) %></th>
+	  <% if admin_signed_in? %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
+	</tr>
+  </thead>
+  <tbody>
+    <% @retails.each do |retail| %>
+      <tr>
+        <td><%= link_to retail.name, retail_path(retail) %></td>
+        <td><%= retail.price %></td>
+        <td><%= retail.location %></td>
+        <td><%= retail.description %></td>
+        <td><%= link_to retail.url, retail.url %></td>
+        <% if admin_signed_in? %>
+		  <td>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_retail_path(retail), :class => 'btn btn-mini' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        retail_path(retail),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>
+          </td>
+		<% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if admin_signed_in? %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_retail_path,
+            :class => 'btn btn-primary' %>
+<% end %>
