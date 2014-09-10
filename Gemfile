@@ -48,3 +48,4 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'devise'
 ruby "2.1.2"
+gem 'unicorn'
