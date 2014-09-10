@@ -49,3 +49,4 @@ gem 'less-rails'
 gem 'devise'
 ruby "2.1.2"
 gem 'unicorn'
+gem 'rails_12factor', group: :production
